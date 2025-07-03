@@ -7,6 +7,13 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+import dagshub
+dagshub.init(repo_owner='rk2289868', repo_name='mlflow-dagshub-demo', mlflow=True)
+
+
+mlflow.set_tracking_uri("https://dagshub.com/rk2289868/mlflow-dagshub-demo.mlflow")
+
+
 # Load the data
 
 iris = load_iris()
@@ -18,9 +25,10 @@ y = iris.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Define the parameters for the RandomForest model
-max_depth = 5
+max_depth = 3
 n_estimators = 100
 
+mlflow.set_experiment("iris-dt")
 
 with mlflow.start_run():
 
