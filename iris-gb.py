@@ -2,7 +2,7 @@ import mlflow
 import mlflow.sklearn
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -28,11 +28,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 max_depth = 5
 n_estimators = 200
 
-mlflow.set_experiment("iris-dt")
+mlflow.set_experiment("iris-gb")
 
 with mlflow.start_run():
 
-    rf = RandomForestClassifier(max_depth=max_depth, n_estimators=n_estimators)
+    rf = GradientBoostingClassifier(max_depth=max_depth, n_estimators=n_estimators)
     rf.fit(X_train, y_train)
     y_pred = rf.predict(X_test)
     accuracy = accuracy_score(y_pred, y_test)
